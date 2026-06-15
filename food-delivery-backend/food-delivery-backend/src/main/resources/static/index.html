@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiteDash - Gourmet Food Delivery</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- App Container -->
+    <div class="app-container">
+        
+        <!-- Header -->
+        <header class="main-header">
+            <div class="header-left">
+                <a href="#" class="logo" id="btn-logo">
+                    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    <span>Bite<span class="highlight">Dash</span></span>
+                </a>
+            </div>
+            
+            <nav class="main-nav">
+                <button class="nav-btn active" id="nav-btn-home">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="nav-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    <span>Browse</span>
+                </button>
+                <button class="nav-btn" id="nav-btn-orders">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="nav-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2" />
+                    </svg>
+                    <span>My Orders</span>
+                </button>
+                <button class="nav-btn admin-toggle-btn" id="nav-btn-admin">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="nav-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                    <span>Admin Panel</span>
+                </button>
+            </nav>
+
+            <div class="header-right">
+                <button class="cart-trigger" id="cart-btn" aria-label="Shopping Cart">
+                    <div class="cart-icon-wrapper">
+                        <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                        <span class="cart-badge" id="cart-count">0</span>
+                    </div>
+                    <span class="cart-total" id="header-cart-total">₹0.00</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Body -->
+        <main class="main-content">
+            
+            <!-- VIEW: Home (Restaurants list) -->
+            <section class="content-view active" id="view-home">
+                <!-- Hero Section -->
+                <div class="hero-section">
+                    <div class="hero-content">
+                        <span class="hero-tag">Authentic South Indian</span>
+                        <h1 class="hero-title">Tamil Nadu Flavors <br>Delivered to Your Doorstep</h1>
+                        <p class="hero-subtitle">Savor hot crispy Dosas, fragrant Chettinad Biryani, and traditional filter coffee from the finest local kitchens.</p>
+                        
+                        <!-- Search & Filters -->
+                        <div class="search-bar-container">
+                            <div class="search-input-wrapper">
+                                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                                <input type="text" id="search-input" placeholder="Search restaurants, cuisines or food items...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-image-overlay"></div>
+                </div>
+
+                <!-- Filters & Controls -->
+                <div class="filter-controls">
+                    <div class="filter-tabs">
+                        <button class="filter-tab active" data-filter="all">All Kitchens</button>
+                        <button class="filter-tab" data-filter="veg">
+                            <span class="dot veg"></span> Veg Only
+                        </button>
+                        <button class="filter-tab" data-filter="rating">⭐ 4.5+ Rating</button>
+                        <button class="filter-tab" data-filter="open">Open Now</button>
+                    </div>
+                    <div class="seeder-container" id="seeder-box">
+                        <button class="btn btn-secondary btn-sm" id="btn-seed-data">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                            </svg>
+                            Seed Demo Data
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Restaurants List -->
+                <div class="section-header">
+                    <h2 class="section-title">Popular Restaurants</h2>
+                    <span class="section-count" id="restaurant-count">Loading...</span>
+                </div>
+                <div class="restaurants-grid" id="restaurants-container">
+                    <!-- Restaurant Cards Dynamic Injection -->
+                    <div class="shimmer-container">
+                        <div class="shimmer-card"></div>
+                        <div class="shimmer-card"></div>
+                        <div class="shimmer-card"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW: Restaurant Menu -->
+            <section class="content-view" id="view-menu">
+                <!-- Back Button -->
+                <button class="back-btn" id="menu-back-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    <span>Back to Restaurants</span>
+                </button>
+
+                <!-- Restaurant Profile -->
+                <div class="restaurant-profile" id="restaurant-profile-banner">
+                    <!-- Dynamic details -->
+                </div>
+
+                <!-- Menu Categories & Food Items Grid -->
+                <div class="menu-layout">
+                    <aside class="menu-sidebar">
+                        <h3 class="sidebar-title">Categories</h3>
+                        <ul class="category-list" id="menu-categories">
+                            <!-- Categories Injection -->
+                        </ul>
+                    </aside>
+                    <div class="menu-items-area">
+                        <div class="section-header">
+                            <h2 class="section-title" id="current-category-name">All Items</h2>
+                        </div>
+                        <div class="food-grid" id="food-container">
+                            <!-- Food Cards Injection -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW: Orders (Order lookup & Tracking) -->
+            <section class="content-view" id="view-orders">
+                <div class="orders-lookup-card">
+                    <h2 class="card-title">Track Your Orders</h2>
+                    <p class="card-subtitle">Enter your phone number to view your orders and track live status updates.</p>
+                    <div class="lookup-form">
+                        <div class="input-group">
+                            <input type="tel" id="lookup-phone-input" placeholder="e.g. 9876543210" required>
+                        </div>
+                        <button class="btn btn-primary" id="btn-lookup-orders">Find Orders</button>
+                    </div>
+                </div>
+
+                <div class="orders-list-section" id="orders-list-container">
+                    <!-- Dynamic Order Listing -->
+                    <div class="empty-state" id="orders-empty-state">
+                        <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2" />
+                        </svg>
+                        <h3>No orders searched yet</h3>
+                        <p>Enter your phone number above to retrieve order records.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW: Admin Panel -->
+            <section class="content-view" id="view-admin">
+                <div class="admin-dashboard-header">
+                    <div>
+                        <h1 class="admin-title">Admin Dashboard</h1>
+                        <p class="admin-subtitle">Manage store orders, restaurants and food menu catalogs.</p>
+                    </div>
+                    <div class="admin-tabs">
+                        <button class="admin-tab active" data-tab="tab-admin-orders">Orders</button>
+                        <button class="admin-tab" data-tab="tab-admin-restaurants">Restaurants</button>
+                        <button class="admin-tab" data-tab="tab-admin-foods">Foods</button>
+                    </div>
+                </div>
+
+                <!-- Admin Tab: Orders Management -->
+                <div class="admin-tab-content active" id="tab-admin-orders">
+                    <div class="admin-section-header">
+                        <h3>Customer Orders</h3>
+                        <button class="btn btn-secondary btn-sm" id="btn-refresh-admin-orders">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.27 15" />
+                            </svg>
+                            Refresh
+                        </button>
+                    </div>
+                    <div class="admin-table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Customer</th>
+                                    <th>Restaurant</th>
+                                    <th>Items</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-orders-table-body">
+                                <tr>
+                                    <td colspan="7" class="text-center">Loading orders...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Admin Tab: Restaurants Management -->
+                <div class="admin-tab-content" id="tab-admin-restaurants">
+                    <div class="admin-section-header">
+                        <h3>Restaurant List</h3>
+                        <button class="btn btn-primary btn-sm" id="btn-add-restaurant-modal">Add Restaurant</button>
+                    </div>
+                    <div class="admin-table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Cuisine</th>
+                                    <th>Rating</th>
+                                    <th>Status</th>
+                                    <th>Phone</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-restaurants-table-body">
+                                <tr>
+                                    <td colspan="7" class="text-center">Loading restaurants...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Admin Tab: Foods Management -->
+                <div class="admin-tab-content" id="tab-admin-foods">
+                    <div class="admin-section-header">
+                        <h3>Food Menu Catalog</h3>
+                        <div class="admin-filter-controls">
+                            <select id="admin-food-restaurant-select" class="form-input">
+                                <option value="">All Restaurants</option>
+                            </select>
+                            <button class="btn btn-primary btn-sm" id="btn-add-food-modal">Add Food Item</button>
+                        </div>
+                    </div>
+                    <div class="admin-table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Restaurant</th>
+                                    <th>Category</th>
+                                    <th>Price</th>
+                                    <th>Type</th>
+                                    <th>Availability</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-foods-table-body">
+                                <tr>
+                                    <td colspan="8" class="text-center">Loading foods...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Cart Sidebar Drawer -->
+        <div class="sidebar-overlay" id="cart-overlay"></div>
+        <aside class="cart-sidebar" id="cart-sidebar">
+            <div class="cart-header">
+                <h3 class="cart-title">Your Cart</h3>
+                <button class="close-btn" id="cart-close-btn" aria-label="Close Cart">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Cart Body -->
+            <div class="cart-body">
+                <div class="cart-items" id="cart-items-container">
+                    <!-- Dynamic cart items -->
+                    <div class="empty-cart-state">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="empty-cart-icon">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                        <p>Your cart is empty</p>
+                        <span>Add items from your favorite restaurants to place an order.</span>
+                    </div>
+                </div>
+
+                <!-- Checkout Details (collapsible or scroll-in) -->
+                <div class="checkout-form-container hidden" id="checkout-form-section">
+                    <h4 class="checkout-title">Delivery Information</h4>
+                    <form id="checkout-form" class="checkout-form">
+                        <div class="form-group">
+                            <label for="cust-name">Full Name</label>
+                            <input type="text" id="cust-name" class="form-input" placeholder="e.g. John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cust-phone">Phone Number</label>
+                            <input type="tel" id="cust-phone" class="form-input" placeholder="e.g. 9876543210" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cust-address">Delivery Address</label>
+                            <textarea id="cust-address" class="form-input" placeholder="e.g. Apartment, House No, Street Details" required></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="payment-method">Payment Method</label>
+                                <select id="payment-method" class="form-input">
+                                    <option value="CASH">Cash on Delivery</option>
+                                    <option value="CARD">Credit / Debit Card</option>
+                                    <option value="UPI">UPI</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="coupon-code">Promo Code</label>
+                                <div class="coupon-input-group">
+                                    <input type="text" id="coupon-code" class="form-input" placeholder="e.g. BITE20">
+                                    <button type="button" class="btn btn-secondary btn-sm" id="btn-apply-coupon">Apply</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cust-instructions">Delivery Instructions</label>
+                            <input type="text" id="cust-instructions" class="form-input" placeholder="e.g. Leave at gate, ring bell">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Cart Footer (Calculations & Action) -->
+            <div class="cart-footer">
+                <div class="calculation-row">
+                    <span>Subtotal</span>
+                    <span id="cart-subtotal">₹0.00</span>
+                </div>
+                <div class="calculation-row discount hidden" id="cart-discount-row">
+                    <span>Discount (<span id="active-coupon-label"></span>)</span>
+                    <span id="cart-discount">-₹0.00</span>
+                </div>
+                <div class="calculation-row total">
+                    <span>Total</span>
+                    <span id="cart-total-amount">₹0.00</span>
+                </div>
+
+                <div class="cart-actions">
+                    <button class="btn btn-primary btn-block" id="btn-cart-action">Proceed to Checkout</button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Toast Notifications -->
+        <div class="toast-container" id="toast-container"></div>
+
+        <!-- MODAL: Add Restaurant -->
+        <div class="modal-backdrop" id="modal-restaurant">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h3>Add New Restaurant</h3>
+                    <button class="modal-close" data-close="modal-restaurant">&times;</button>
+                </div>
+                <form id="form-add-restaurant" class="modal-form">
+                    <div class="form-group">
+                        <label for="rest-name">Restaurant Name *</label>
+                        <input type="text" id="rest-name" class="form-input" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="rest-cuisine">Cuisine *</label>
+                            <input type="text" id="rest-cuisine" placeholder="e.g. Italian, Fast Food" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="rest-price">Price Range *</label>
+                            <select id="rest-price" class="form-input" required>
+                                <option value="₹">₹ (Budget)</option>
+                                <option value="₹₹" selected>₹₹ (Medium)</option>
+                                <option value="₹₹₹" >₹₹₹ (Premium)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="rest-delivery">Delivery Time *</label>
+                            <input type="text" id="rest-delivery" placeholder="e.g. 25 min" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="rest-rating">Rating *</label>
+                            <input type="number" id="rest-rating" min="1" max="5" step="0.1" value="4.0" class="form-input" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="rest-phone">Phone Number</label>
+                            <input type="tel" id="rest-phone" class="form-input">
+                        </div>
+                        <div class="form-group check-group">
+                            <input type="checkbox" id="rest-veg" class="form-check">
+                            <label for="rest-veg">Veg Only Restaurant</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="rest-address">Address *</label>
+                        <input type="text" id="rest-address" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="rest-image">Image URL</label>
+                        <input type="url" id="rest-image" placeholder="https://images.unsplash.com/..." class="form-input">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-close="modal-restaurant">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Create Restaurant</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- MODAL: Add Food Item -->
+        <div class="modal-backdrop" id="modal-food">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h3>Add New Food Item</h3>
+                    <button class="modal-close" data-close="modal-food">&times;</button>
+                </div>
+                <form id="form-add-food" class="modal-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="food-restaurant">Restaurant *</label>
+                            <select id="food-restaurant" class="form-input" required>
+                                <!-- Injected options -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="food-name">Food Item Name *</label>
+                            <input type="text" id="food-name" class="form-input" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="food-price">Price (₹) *</label>
+                            <input type="number" id="food-price" min="0.1" step="0.01" placeholder="9.99" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="food-category">Category *</label>
+                            <input type="text" id="food-category" placeholder="e.g. Starters, Main Course, Drinks" class="form-input" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="food-addons">Add-ons (Comma Separated)</label>
+                            <input type="text" id="food-addons" placeholder="e.g. Extra Cheese, Extra Mayo" class="form-input">
+                        </div>
+                        <div class="form-group check-group-row">
+                            <div class="check-group">
+                                <input type="checkbox" id="food-veg" class="form-check" checked>
+                                <label for="food-veg">Is Vegetarian</label>
+                            </div>
+                            <div class="check-group">
+                                <input type="checkbox" id="food-available" class="form-check" checked>
+                                <label for="food-available">Is Available</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="food-desc">Description *</label>
+                        <textarea id="food-desc" class="form-input" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="food-image">Image URL</label>
+                        <input type="url" id="food-image" placeholder="https://images.unsplash.com/..." class="form-input">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-close="modal-food">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Add Food Item</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Main JavaScript File -->
+    <script src="app.js"></script>
+</body>
+</html>
